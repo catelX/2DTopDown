@@ -21,10 +21,15 @@ namespace GridCell
         public void AStarUpdate()
         {
             grid.DebugCellWalkable();
+            grid.DebugGrid();
         }
 
         public List<Cell> ReturnPath(Cell startCell, Cell endCell)
         {
+            if (endCell == null || startCell == null)
+            {
+                return new List<Cell>();
+            }
             openedList = new List<Cell>();
             closedList = new List<Cell>();
             currentCell = startCell;
@@ -37,7 +42,7 @@ namespace GridCell
                 neighbourList = grid.GetCellNeighbours(currentCell);
                 foreach (Cell cell in neighbourList)
                 {
-                    if (closedList.Contains(cell) || openedList.Contains(cell) || !cell.isWalkable) continue;
+                    if (closedList.Contains(cell) || openedList.Contains(cell)) continue;
 
                     cell.CalculateCosts(startCell, endCell);
                     cell.SetParent(currentCell);

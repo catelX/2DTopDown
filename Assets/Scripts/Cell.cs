@@ -44,27 +44,32 @@ namespace GridCell
 
         public void CalculateCosts(Cell startCell, Cell endCell)
         {
-            CalculateGandHCost(startCell, endCell);
+            gCost = GetCalculatedCostTo(startCell);
+            hCost = GetCalculatedCostTo(endCell);
             fCost = gCost + hCost;
         }
 
-        private void CalculateGandHCost(Cell startCell, Cell endCell)
+        private float GetCalculatedCostTo(Cell cell)
         {
-            // GCost Calculate
-            float distance = 0;
-            Vector2 index = startCell.GetIndex();
-            distance += Mathf.Abs(index.x - indexX);
-            distance += Mathf.Abs(index.y - indexY);
+            float x, y;
+            Vector2 index = cell.GetIndex();
+            x = Mathf.Abs(index.x - indexX);
+            y = Mathf.Abs(index.y - indexY);
+            if(x > y)
+            {
+                float tens = x - y;
+                y *= 14;
+                tens *= 10;
+                return y + tens;
+            }
+            else
+            {
+                float tens = y - x;
+                x *= 14;
+                tens *= 10;
+                return x + tens;
 
-            gCost = distance * 10;
-
-            // HCost Calculate
-            distance = 0;
-            Vector2 otherIndex = endCell.GetIndex();
-            distance += Mathf.Abs(otherIndex.x - indexX);
-            distance += Mathf.Abs(otherIndex.y - indexY);
-
-            hCost = distance * 10;
+            }
         }
 
         public float GetFCost()
@@ -82,9 +87,14 @@ namespace GridCell
             return parentCell;
         }
 
+        public Vector3 GetCenterPos()
+        {
+            return new Vector3(origin.x + (cellSize / 2), origin.y + (cellSize / 2), origin.z);
+        }
+
         public void DebugLineToNextCell(Cell cell)
         {
-            Debug.DrawLine(new Vector3(origin.x + (cellSize / 2), origin.y + (cellSize / 2)), new Vector3(cell.origin.x + (cell.cellSize / 2), cell.origin.y + (cell.cellSize / 2)), Color.green, 100f);
+            Debug.DrawLine(new Vector3(origin.x + (cellSize / 2), origin.y + (cellSize / 2)), new Vector3(cell.origin.x + (cell.cellSize / 2), cell.origin.y + (cell.cellSize / 2)), Color.green);
         }
 
         public void DrawRect(Color color, float duration)
