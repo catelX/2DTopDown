@@ -85,10 +85,12 @@ public class PlayerController : MonoBehaviour
         if (Input.GetKeyUp(KeyCode.A) || Input.GetKeyUp(KeyCode.D))
         {
             moveDir.x = 0;
+            ChangeAnimationToWalk();
         }
         if (Input.GetKeyUp(KeyCode.W) || Input.GetKeyUp(KeyCode.S))
         {
             moveDir.y = 0;
+            ChangeAnimationToWalk();
         }
         if (moveDir == Vector2.zero)
         {
