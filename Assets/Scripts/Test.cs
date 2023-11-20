@@ -33,29 +33,8 @@ namespace GridCell
             aStar = new AStar_Pathfinding(width, height, cellSize, origin);
         }
 
-        public void Update()
+        private void Update()
         {
-            //if (Input.GetKeyDown(KeyCode.S))
-            //{
-            //    startCell = aStar.grid.GetCellFromWorldPos(Camera.main.ScreenToWorldPoint(Input.mousePosition));
-            //    if(startCell != null)start.transform.position = startCell.GetCenterPos();
-            //    Debug.Log("start");
-            //}
-            //if (Input.GetKeyDown(KeyCode.E))
-            //{
-            //    endCell = aStar.grid.GetCellFromWorldPos(Camera.main.ScreenToWorldPoint(Input.mousePosition));
-            //    if(endCell != null)target.transform.position = endCell.GetCenterPos();
-            //    Debug.Log("end");
-            //}
-            //if (Input.GetKeyDown(KeyCode.W))
-            //{
-            //    Cell cell = aStar.grid.GetCellFromWorldPos(Camera.main.ScreenToWorldPoint(Input.mousePosition));
-            //    if(cell != null) cell.ChangeWalkable();
-            //}    
-            //if(Input.GetKeyDown(KeyCode.KeypadEnter))
-            //{
-            //    start.GetComponent<Enemy_Base>().ExitCurrentState();
-            //}
             DebugPath();
             aStar.AStarUpdate();
         }
